@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -34,6 +35,11 @@ namespace ApotekApiAutoMapper.Services
         {
             var obat = await _context.Obats.SingleOrDefaultAsync(o => o.Id == obatId);
 
+            //var folderName = Path.Combine("Storage", "Obat");
+            //var path = Path.Combine(Directory.GetCurrentDirectory(), obat.Foto);
+            //FileInfo file = new FileInfo(path);
+
+            //file.Delete();
             _context.Obats.Remove(_mapper.Map<Obat>(obat));
             await _context.SaveChangesAsync();
 

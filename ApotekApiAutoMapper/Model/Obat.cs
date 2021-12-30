@@ -12,5 +12,6 @@ namespace ApotekApiAutoMapper.Model
         public string Nama { get; set; }
         public int Stok { get; set; }
         public int Harga { get; set; }
+        public string Foto { get; set; }
     }
 }

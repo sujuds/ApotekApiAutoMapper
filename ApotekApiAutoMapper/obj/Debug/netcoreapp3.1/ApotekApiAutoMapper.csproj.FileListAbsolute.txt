@@ -31,3 +31,4 @@ C:\Users\Alterra\source\repos\PROJECT\ApotekApiAutoMapper\ApotekApiAutoMapper\ob
 C:\Users\Alterra\source\repos\PROJECT\ApotekApiAutoMapper\ApotekApiAutoMapper\obj\Debug\netcoreapp3.1\ApotekApiAutoMapper.dll
 C:\Users\Alterra\source\repos\PROJECT\ApotekApiAutoMapper\ApotekApiAutoMapper\obj\Debug\netcoreapp3.1\ApotekApiAutoMapper.pdb
 C:\Users\Alterra\source\repos\PROJECT\ApotekApiAutoMapper\ApotekApiAutoMapper\obj\Debug\netcoreapp3.1\ApotekApiAutoMapper.genruntimeconfig.cache
+C:\Users\Alterra\source\repos\PROJECT\ApotekApiAutoMapper\ApotekApiAutoMapper\obj\Debug\netcoreapp3.1\ApotekApiAutoMapper.csproj.AssemblyReference.cache

@@ -1,9 +1,12 @@
-﻿using ApotekApiAutoMapper.DTOs;
+﻿using ApotekApiAutoMapper.Controllers.Param;
+using ApotekApiAutoMapper.DTOs;
 using ApotekApiAutoMapper.Services.Interface;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -38,9 +41,20 @@ namespace ApotekApiAutoMapper.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Add(ObatDto obat)
+        [Consumes("multipart/form-data")]
+        public async Task<ActionResult> Add([FromForm] ParamObatWithFotoDto param)
         {
-            await _obatService.AddObat(obat);
+            string fileName = UploadFile(param.Foto).Result.ToString();
+
+            await _obatService.AddObat(new ObatDto { 
+                Kode = param.Kode,
+                Harga = param.Harga,
+                Nama = param.Nama,
+                Stok = param.Stok,
+                Foto = fileName
+            });
+
+
             return new JsonResult(new
             {
                 status = "success",
@@ -69,6 +83,37 @@ namespace ApotekApiAutoMapper.Controllers
                 status = "success",
                 message = "data berhasil dihapus!"
             });
+        }
+
+
+
+        private async Task<string> UploadFile(IFormFile file)
+        {
+            string fileName;
+            string result = null;
+            try
+            {
+                var folderName = Path.Combine("Storage", "Obat");
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+
+                var extension = "." + file.FileName.Split('.')[file.FileName.Split('.').Length - 1];
+                fileName = DateTime.Now.Ticks + extension;
+
+                result = fileName;
+
+                var fullPath = Path.Combine(pathToSave, fileName);
+                using (var stream = new FileStream(fullPath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+            }
+            catch (Exception)
+            {
+                //log error
+            }
+
+            return result;
         }
     }
 }
